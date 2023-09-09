@@ -21,13 +21,10 @@ jobs:
           bun-version: latest
 
       - name: Install dependencies for bun
-        run: bun install && bun x @puppeteer/browsers install chromium
+        run: bun install
 
-      - name: Cache Chromium
-        uses: actions/cache@v2
-        with:
-          path: chromium
-          key: chromium-${{ runner.os }}-${{ hashFiles('**/bun.lockb') }}
+      - name: Install Chromium
+        run: bun x @puppeteer/browsers install chromium
 
       - name: Run script
         env:
