@@ -1,0 +1,42 @@
+name: Upload Wallpaper
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0/15 * * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies for bun
+        run: bun install && bun x @puppeteer/browsers install chromium
+
+      - name: Cache Chromium
+        uses: actions/cache@v2
+        with:
+          path: chromium
+          key: chromium-${{ runner.os }}-${{ hashFiles('**/bun.lockb') }}
+
+      - name: Run script
+        env:
+          ALBUM_ID: ${{ vars.ALBUM_ID }}
+          HABITS_DATABASE_ID: ${{ vars.HABITS_DATABASE_ID }}
+          TODAY_TASKS_DATABASE_ID: ${{ vars.TODAY_TASKS_DATABASE_ID }}
+          CLIENT_ID: ${{secrets.CLIENT_ID}}
+          CLIENT_SECRET: ${{secrets.CLIENT_SECRET}}
+          NOTION_API_KEY: ${{secrets.NOTION_API_KEY}}
+          REDIRECT_URI: ${{secrets.REDIRECT_URI}}
+          REFRESH_TOKEN: ${{secrets.REFRESH_TOKEN}}
+        run: bun index.js

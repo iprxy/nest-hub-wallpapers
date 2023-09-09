@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100;200;300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: 'Martian Mono', monospace;
+        background-image: url('https://source.unsplash.com/random/2560x1440/?dark');
+        width: 1536px;
+        height: 900px;
+        background-size: cover;
+      }
+
+      .blocks {
+        display: flex;
+      }
+
+      .block {
+        background-color: rgba(18, 18, 18, 0.752);
+        display: flex;
+        flex-direction: column;
+        height: fit-content;
+        color: white;
+        width: 39%;
+        margin: 50px;
+        padding: 30px;
+      }
+
+      h1 {
+        font-size: 32pt;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 18pt;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="blocks">
+      <div class="block" width="39%"><h1>💪 Habits</h1><p>❌ 1 hour of code learning</p><p>❌ 3 hours of coding</p><p>❌ Wake Up Early</p><p>❌ Hour of reading</p><p>❌ Max 2h socials</p><p>❌ Hour of Hebrew</p><p>❌ 90 Push-ups or Workout</p><p>❌ Walking</p></div>
+      <div class="block" width="59%">
+        <h1>🙅‍♂️ Tasks</h1><p>✅ Hebrew practice</p><p>✅ Refactor notion to nest hub script</p>
+        <br />
+        <p class="updated-at" style="font-size: 10pt; text-align: right"></p>
+      </div>
+    </div>
+    <script>
+      const options = { timeZone: 'Asia/Jerusalem' };
+      const currentTime = new Date().toLocaleTimeString('en-GB', options);
+      document.addEventListener(
+        'DOMContentLoaded',
+        (document.querySelector('.updated-at').innerHTML = 'Updated: ' + currentTime),
+      );
+    </script>
+  </body>
+</html>
